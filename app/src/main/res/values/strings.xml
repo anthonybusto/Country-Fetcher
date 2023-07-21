@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Country Fetcher</string>
+    <string name="empty_list">\\(^Д^)/</string>
+    <string name="nothing">Nothing!!</string>
+    <string name="no_countries_were_found">No countries were found</string>
+    <string name="fetch_countries_failed">Failed to fetch countries</string>
+    <string name="retry">RETRY</string>
+    <string name="country_list_title">Countries List</string>
+    <string name="country_item_title">%1$s, %2$s</string>
+</resources>

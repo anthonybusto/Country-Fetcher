@@ -1,0 +1,31 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryVariant">@color/primaryColorLight</item>
+        <item name="colorPrimaryDark">@color/primaryColorDark</item>
+        <item name="colorSecondary">@color/secondaryColor</item>
+        <item name="colorAccent">@color/accentColor</item>
+        <item name="colorButtonNormal">@color/accentColor</item>
+        <item name="android:statusBarColor">@color/primaryColorDark</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowActionModeOverlay">true</item>
+        <!-- AppTheme.PopupOverlay style -->
+        <item name="android:popupMenuStyle">@style/PopupMenuOverlay</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Dark" />
+
+    <style name="PopupMenuOverlay" parent="Widget.MaterialComponents.PopupMenu.Overflow">
+        <!-- Customize the popup menu style -->
+    </style>
+
+
+
+
+</resources>
+

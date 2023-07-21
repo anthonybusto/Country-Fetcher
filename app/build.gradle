@@ -1,0 +1,64 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-android'
+    id 'kotlin-parcelize'
+}
+
+android {
+    namespace 'com.busto.countryfetcher'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.busto.countryfetcher"
+        minSdk 24
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    viewBinding {
+        enabled = true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    //Android
+    implementation "androidx.core:core-ktx:$androidcore"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle"
+    implementation "androidx.appcompat:appcompat:$appcompat"
+    implementation "com.google.android.material:material:$material"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintlayout"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$viewmodel"
+    implementation "androidx.fragment:fragment-ktx:$fragmentKtx"
+
+    //Testing
+    testImplementation "junit:junit:$junit"
+    androidTestImplementation "androidx.test.ext:junit:$junittest"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso"
+    testImplementation "io.mockk:mockk:$mockk"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesTest"
+    androidTestImplementation "androidx.arch.core:core-testing:$coreTesting"
+
+    //Network
+    implementation "com.squareup.retrofit2:retrofit:$retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$gson"
+
+}
