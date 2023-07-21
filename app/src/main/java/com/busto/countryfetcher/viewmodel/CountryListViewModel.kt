@@ -6,8 +6,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.busto.countryfetcher.R
+import com.busto.countryfetcher.mapper.CountryMapper
 import com.busto.countryfetcher.model.Country
 import com.busto.countryfetcher.repository.CountryRepository
+import com.busto.countryfetcher.ui.renderables.CountryRenderable
 import com.busto.countryfetcher.utils.CoroutineScheduler
 import com.busto.countryfetcher.utils.Logger
 import com.busto.countryfetcher.utils.ResourceResolver
@@ -25,7 +27,7 @@ sealed class CountryListViewState : Parcelable {
     @Parcelize
     data class Content(
         val title: String,
-        val countries: @RawValue List<Country> = emptyList()
+        val countries: @RawValue List<CountryRenderable> = emptyList()
     ) : CountryListViewState()
 
     @Parcelize
@@ -44,6 +46,7 @@ class CountryListViewModel constructor(
     private val resourceResolver: ResourceResolver,
     private val coroutineScheduler: CoroutineScheduler,
     private val logger: Logger,
+    private val countryMapper: CountryMapper,
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -55,7 +58,6 @@ class CountryListViewModel constructor(
         KEY_VIEW_STATE,
         CountryListViewState.Loading
     )
-
 
     fun start() {
         val savedViewState = savedStateHandle.get<CountryListViewState>(KEY_VIEW_STATE)
@@ -78,7 +80,7 @@ class CountryListViewModel constructor(
 
                     val contentState = CountryListViewState.Content(
                         title = resourceResolver.getString(R.string.country_list_title),
-                        countries = countries
+                        countries = countryMapper.mapCountryToRenderable(countries)
                     )
 
                     savedStateHandle[KEY_VIEW_STATE] = contentState
@@ -90,7 +92,6 @@ class CountryListViewModel constructor(
             }
         }
     }
-
 }
 
 //ViewModelProviderFactory
@@ -99,6 +100,7 @@ class CountryListViewModelFactory constructor(
     private val resourceResolver: ResourceResolver,
     private val coroutineScheduler: CoroutineScheduler,
     private val logger: Logger,
+    private val countryMapper: CountryMapper,
     private val savedStateHandle: SavedStateHandle
 ) : ViewModelProvider.Factory {
 
@@ -109,6 +111,7 @@ class CountryListViewModelFactory constructor(
                 resourceResolver,
                 coroutineScheduler,
                 logger,
+                countryMapper,
                 savedStateHandle
             ) as T
         }

@@ -1,6 +1,7 @@
 package com.busto.countryfetcher
 
 import androidx.lifecycle.SavedStateHandle
+import com.busto.countryfetcher.mapper.CountryMapper
 import com.busto.countryfetcher.model.Country
 import com.busto.countryfetcher.model.Currency
 import com.busto.countryfetcher.model.Language
@@ -44,6 +45,7 @@ class CountryViewModelTest {
     private val mockResourceResolver: ResourceResolver = mockk(relaxed = true)
     private val mockCoroutineScheduler: CoroutineScheduler = mockk()
     private val mockLogger: Logger = mockk(relaxed = true)
+    private val mockCountryMapper: CountryMapper = mockk(relaxed = true)
 
     @OptIn(DelicateCoroutinesApi::class)
     private val testingThread = newSingleThreadContext("vm_thread")
@@ -56,13 +58,13 @@ class CountryViewModelTest {
             mockResourceResolver,
             mockCoroutineScheduler, // Provide the test dispatcher to the factory
             mockLogger,
+            mockCountryMapper,
             fakeSavedStateHandle
         ).create(CountryListViewModel::class.java)
     }
 
 
     private val fakeCountriesList = listOf(
-
         Country(
             capital = "London",
             code = "GB",
@@ -120,6 +122,9 @@ class CountryViewModelTest {
             // Advance the coroutine dispatcher until all work is done
             advanceUntilIdle()
 
+            //Verify that we mapped the countries from domain to ui
+            verify { mockCountryMapper.mapCountryToRenderable(fakeCountriesList) }
+
             // Assert the loading state is emitted first
             assert(states[0] is CountryListViewState.Loading) {
                 "Invalid state! Should be Loading but is is ${states[0]}"
@@ -127,9 +132,10 @@ class CountryViewModelTest {
 
             // Assert the content state with the expected list of countries is emitted next
             val contentState = states[1] as CountryListViewState.Content
-            assert(fakeCountriesList == contentState.countries) {
+            assert(mockCountryMapper.mapCountryToRenderable(fakeCountriesList) == contentState.countries) {
                 "Countries didn't match!"
             }
+
 
             //Verify that we used the ResourceResolver to get the country_list_title
             verify { mockResourceResolver.getString(R.string.country_list_title) }

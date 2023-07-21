@@ -7,10 +7,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.busto.countryfetcher.R
 import com.busto.countryfetcher.databinding.ItemCountryBinding
-import com.busto.countryfetcher.model.Country
+import com.busto.countryfetcher.ui.renderables.CountryRenderable
 
 class CountryListAdapter :
-    ListAdapter<Country, CountryListAdapter.CountryViewHolder>(CountryDiffCallback()) {
+    ListAdapter<CountryRenderable, CountryListAdapter.CountryViewHolder>(CountryDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CountryViewHolder {
         val binding = ItemCountryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -23,7 +23,7 @@ class CountryListAdapter :
 
     inner class CountryViewHolder(private val binding: ItemCountryBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(country: Country) {
+        fun bind(country: CountryRenderable) {
             with(binding) {
                 nameTextView.text = itemView.context.getString(
                     R.string.country_item_title,
@@ -36,12 +36,12 @@ class CountryListAdapter :
         }
     }
 
-    class CountryDiffCallback : DiffUtil.ItemCallback<Country>() {
-        override fun areItemsTheSame(oldItem: Country, newItem: Country): Boolean {
+    class CountryDiffCallback : DiffUtil.ItemCallback<CountryRenderable>() {
+        override fun areItemsTheSame(oldItem: CountryRenderable, newItem: CountryRenderable): Boolean {
             return oldItem.name == newItem.name
         }
 
-        override fun areContentsTheSame(oldItem: Country, newItem: Country): Boolean {
+        override fun areContentsTheSame(oldItem: CountryRenderable, newItem: CountryRenderable): Boolean {
             return oldItem == newItem
         }
     }

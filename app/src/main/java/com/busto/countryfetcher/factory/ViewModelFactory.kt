@@ -5,9 +5,11 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.busto.countryfetcher.locators.CountryServiceLocator
 import com.busto.countryfetcher.locators.LoggingServiceLocator
 import com.busto.countryfetcher.locators.NetworkServiceLocator
 import com.busto.countryfetcher.locators.ResourcesServiceLocator
+import com.busto.countryfetcher.mapper.CountryMapper
 import com.busto.countryfetcher.viewmodel.CountryListViewModel
 import com.busto.countryfetcher.viewmodel.CountryListViewModelFactory
 
@@ -27,6 +29,7 @@ class ViewModelFactory<VM : ViewModel> {
                     ResourcesServiceLocator.providesResourceResolver(),
                     NetworkServiceLocator.providesCoroutineScheduler(),
                     LoggingServiceLocator.providesLogger(),
+                    CountryServiceLocator.providesCountryMapper(),
                     SavedStateHandle()
                 )
             }
