@@ -9,7 +9,6 @@ import com.busto.countryfetcher.locators.CountryServiceLocator
 import com.busto.countryfetcher.locators.LoggingServiceLocator
 import com.busto.countryfetcher.locators.NetworkServiceLocator
 import com.busto.countryfetcher.locators.ResourcesServiceLocator
-import com.busto.countryfetcher.mapper.CountryMapper
 import com.busto.countryfetcher.viewmodel.CountryListViewModel
 import com.busto.countryfetcher.viewmodel.CountryListViewModelFactory
 

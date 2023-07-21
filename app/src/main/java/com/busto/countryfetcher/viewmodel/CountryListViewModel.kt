@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.busto.countryfetcher.R
 import com.busto.countryfetcher.mapper.CountryMapper
-import com.busto.countryfetcher.model.Country
 import com.busto.countryfetcher.repository.CountryRepository
 import com.busto.countryfetcher.ui.renderables.CountryRenderable
 import com.busto.countryfetcher.utils.CoroutineScheduler
