@@ -33,6 +33,11 @@ sealed class CountryListViewState : Parcelable {
 }
 
 
+/**
+ * Due to specific instructions, we are not using DI
+ * Ideally the ViewModel and it's dependencies would be provided via
+ * some DI framework like Dagger Hilt
+ */
 //ViewModel
 class CountryListViewModel constructor(
     private val countryRepository: CountryRepository,

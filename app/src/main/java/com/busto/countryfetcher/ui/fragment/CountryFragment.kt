@@ -20,7 +20,7 @@ class CountryFragment : Fragment() {
 
     /**
      * Due to specific instructions, we are not using DI
-     * Ideally the ViewModel and it's dependencies would be provider via
+     * Ideally the ViewModel and it's dependencies would be provided via
      * some DI framework like Dagger Hilt
      */
     private val countryViewModel: CountryListViewModel by activityViewModel()
